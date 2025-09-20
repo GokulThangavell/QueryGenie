@@ -63,9 +63,23 @@ def search_schema(query:str):
         table= res.payload.get("table", "")
         if(table.lower() == query):
             filtered.append(res.payload)
-
-
     return filtered
+
+
+def delete_schema(table_name:str):
+    qdrant_client.delete(
+        collection_name=collection_name,
+        points_selector={"points":[hash(table_name)]}
+    )
+    return {"message":f"Schema {table_name} deleted successfully"}
+
+
+def delete_all_schemas():
+    qdrant_client.delete(
+        collection_name=collection_name,
+        points_selector={"filter":{}}
+    )
+    return {"message":"All schemas deleted successfully"}
 
 
 #def search_schema(query:str):
