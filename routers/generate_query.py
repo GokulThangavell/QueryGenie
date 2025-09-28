@@ -20,4 +20,4 @@ def ask_question(user_query: UserQuery):
     { "name": "Status", "type": "varchar(20)" }
   ]
 }
-    return to_sql(user_query.question, schema)
+    return to_sql(user_query.question)
